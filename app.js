@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
-const { cardsRoutes } = require('./routes/cards');
-const { usersRoutes } = require('./routes/users');
+const helmet = require('helmet');
+const { routes } = require('./routes');
 
 const { PORT = 3000, MONGO_URL = 'mongodb://localhost:27017/mestodb' } = process.env;
 const app = express();
+
+app.use(helmet());
 
 app.use((req, res, next) => {
   req.user = {
@@ -15,8 +16,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/users', usersRoutes);
-app.use('/cards', cardsRoutes)
+app.use('/', routes);
 
 async function main() {
   await mongoose.connect(MONGO_URL, {
