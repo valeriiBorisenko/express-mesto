@@ -15,7 +15,6 @@
     "url": "git+https://github.com/valeriiBorisenko/express-mesto.git"
   },
   "keywords": [],
-
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/valeriiBorisenko/express-mesto/issues"
@@ -29,6 +28,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "helmet": "^4.5.0",
     "mongoose": "^5.12.5"
   }
 }
