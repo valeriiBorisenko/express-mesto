@@ -12,11 +12,13 @@ exports.getUsers = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId).orFail(new Error('CastError'));
+    const user = await User.findById(req.params.userId).orFail(new Error('NotFound'));
 
     res.send(user);
   } catch (err) {
-    if (err.name === 'CastError') {
+    if (err.message === 'NotFound') {
+      res.status(400).send({ message: 'Переданы некорректные данные пользователя' });
+    } else if (err.name === 'CastError') {
       res.status(404).send({ message: 'Пользователь с указанным _id не найден' });
     } else {
       res.status(500).send({ message: 'На сервере произошла ошибка' });

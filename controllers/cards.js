@@ -62,7 +62,7 @@ exports.likeCard = async (req, res) => {
 
 exports.dislikeCard = async (req, res) => {
   try {
-    const card = await Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true }).orFail(new Error('NotValidId, CastError'));
+    const card = await Card.findByIdAndUpdate(req.params.cardId, { $pull: { likes: req.user._id } }, { new: true }).orFail(new Error('NotValidId'));
 
     res.send(card);
   } catch (err) {
