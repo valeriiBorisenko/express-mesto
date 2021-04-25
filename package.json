@@ -1,7 +1,8 @@
 {
   "name": "express-mesto",
   "version": "1.0.0",
-  "description": "Back-end",
+  "description": "Проект Mesto фронтенд + бэкенд",
+  "author": "Valerii Borisenko",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
@@ -14,7 +15,7 @@
     "url": "git+https://github.com/valeriiBorisenko/express-mesto.git"
   },
   "keywords": [],
-  "author": "",
+
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/valeriiBorisenko/express-mesto/issues"
