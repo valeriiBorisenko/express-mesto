@@ -9,9 +9,9 @@ const NotFoundError = require('../errors/not-found-err');
 
 const routes = express.Router();
 
-routes.post('/sigin', express.json(), joiAuth, login);
+routes.post('/signin', express.json(), joiLogin, login);
 
-routes.post('/signup', express.json(), joiLogin, createUser);
+routes.post('/signup', express.json(), joiAuth, createUser);
 
 routes.use(auth);
 
