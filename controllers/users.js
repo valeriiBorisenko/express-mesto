@@ -35,12 +35,12 @@ exports.getUser = async (req, res, next) => {
 
 exports.getUserById = async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.userId).orFail(new Error('ValidationError'));
+    const user = await User.findById(req.params.userId).orFail(new Error('NotFoundError'));
     res.status(200).send(user);
   } catch (err) {
-    if (err.message === 'ValidationError') {
+    if (err.name === 'CastError') {
       next(new ValidationError('Переданы некорректные данные пользователя'));
-    } else if (err.name === 'CastError') {
+    } else if (err.message === 'NotFoundError') {
       next(new NotFoundError('Пользователь с указанным _id не найден'));
     }
     next(err);

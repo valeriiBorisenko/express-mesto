@@ -24,6 +24,7 @@ async function main() {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
+    useUnifiedTopology: true,
   });
   console.log('Connected to mestodb');
 

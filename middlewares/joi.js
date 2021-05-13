@@ -1,22 +1,28 @@
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 
-exports.joiToken = celebrate({
+exports.joiUserId = celebrate({
   params: Joi.object().keys({
-    token: Joi.string().token(),
+    userId: Joi.string().length(24).hex(),
+  }),
+});
+
+exports.joiCardId = celebrate({
+  params: Joi.object().keys({
+    cardId: Joi.string().length(24).hex(),
   }),
 });
 
 exports.joiProfileUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
+    about: Joi.string().min(2).max(30).required(),
   }),
 });
 
 exports.joiAvatarUser = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().custom((value, helpers) => {
+    avatar: Joi.string().required().custom((value, helpers) => {
       if (validator.isURL(value, { require_protocol: true, dissalow_auth: true })) {
         return value;
       } return helpers.message('Ссылка не подходит');
@@ -46,13 +52,13 @@ exports.joiAuth = celebrate({
       return helpers.message('Ссылка не подходит');
     }),
     email: Joi.string().required().email(),
-    password: Joi.string().required(),
+    password: Joi.string().required().min(8),
   }),
 });
 
 exports.joiLogin = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required(),
+    password: Joi.string().required().min(8),
   }),
 });
